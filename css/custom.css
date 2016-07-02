@@ -8,6 +8,7 @@ body{
 .container{
 	width: 100%;
 	color: black;
+	padding: 0;
 
 }
 .marvel-device .screen{
@@ -41,4 +42,45 @@ md-pagination-wrapper{
 md-input-container.md-block {
     display: block;
     text-align: left;
+}
+
+.md-padding{
+	padding: 0;
+}
+
+input#input_4{
+	width: 78%;
+}
+
+.search_input {
+    padding-left: 1em;
+    padding-top: 9px;
+}
+
+button.md-raised.search_icon.md-button.md-ink-ripple{
+	min-width: 49px;
+    position: fixed;
+    top: 15px;
+    left: 17em;
+}
+
+md-card md-card-title{
+	padding: 14px 0px;
+}
+
+p.track_title{
+	float: left;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+p.track_genres{
+	float: left;
+    color: #5f5858;
+    font-size: 13px;
+    margin-top: 1px;
+}
+md-card.md-default-theme, md-card
+{
+	height: 7em;
 }

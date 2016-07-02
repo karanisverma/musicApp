@@ -11,6 +11,7 @@
     <link href="css/devices.min.css" rel="stylesheet">
     <!-- Custom css -->
     <link href="css/custom.css" rel="stylesheet">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -36,11 +37,14 @@
         <md-content class="md-padding">
              <div ng-controller="trackController as track" class="container">
         <!-- Testing if everything is working fine -->
+        <div class="search_input">
         <md-input-container class="md-block" flex-gt-sm >
             <label>Search</label>
             <input ng-model="track.searchKeyword">
+            <md-button  class="md-raised search_icon" ng-click="track.search()"><i class="fa fa-search" aria-hidden="true"></i></md-button>
         </md-input-container>
-        <md-button class="md-raised" ng-click="track.search()">Search</md-button>
+        </div>
+        <!-- <md-button class="md-raised" ng-click="track.search()">Search</md-button> -->
         <button ng-click="track.allsongs()">Get Tracks</button>
         <button ng-click="track.nextTrack()">Next </button>
         <button ng-click="track.prevTrack()">Prev</button>
@@ -111,11 +115,15 @@
             </md-card>
         </div>
         <!-- ---------------------------------All tracks-------------------------------- -->
-        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch class="col-md-10 col-md-offset-1" ng-repeat="track in track.tracks">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch class="col-md-12" ng-repeat="track in track.tracks">
             <md-card-title>
                 <md-card-title-text>
                     <!-- <span class="md-headline">{{track.id}}</span> -->
-                    <span ng-click="track.showEditTrackForm(track.title,track.rating,track.genres,track.id)" class="md-subhead">{{track.title}} [{{track.genres}}]  {{track.rating}}</span>
+                    <span ng-click="track.showEditTrackForm(track.title,track.rating,track.genres,track.id)" class="md-subhead">
+                    <p class="track_title">{{track.title}}</p><br>
+                     <p class="track_genres">[{{track.genres}}] </p>
+                      <p class="track_rating"> {{track.rating}}</p>
+                      </span>
                     <!--  <span class="md-subhead"></span>
                         <span class="md-subhead"></span> -->
                     <!-- <span class="md-subhead">Damn Right! you are ;)</span> -->
