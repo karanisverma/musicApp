@@ -2,6 +2,9 @@ html,body{
 	background: #f64d3d;
 	overflow: hidden;
 }
+body{
+	zoom:75%;
+}
 .container{
 	width: 100%;
 	color: black;
