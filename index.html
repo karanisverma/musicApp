@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html ng-app="music-app">
+<head>
+    <title>Music APP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS  -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Angular material css -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <!-- Custom css -->
+    <link href="devices.min.css" rel="stylesheet">
+    <link href="custom.css" rel="stylesheet">
+</head>
+
+<body>
+<div class = "mobile device">
+    <div class="marvel-device htc-one">
+    <div class="top-bar"></div>
+    <div class="camera"></div>
+    <div class="sensor"></div>
+    <div class="speaker"></div>
+    <div class="screen">
+        <!-- Content goes here -->
+
+    <div ng-controller="musicAppController as musicApp" class="container">
+        <!-- Testing if everything is working fine -->
+        <md-input-container class="md-block" flex-gt-sm >
+            <label>Search</label>
+            <input ng-model="musicApp.searchKeyword">
+        </md-input-container>
+        <md-button class="md-raised" ng-click="musicApp.search()">Search</md-button>
+        <button ng-click="musicApp.allsongs()">Get Tracks</button>
+        <button ng-click="musicApp.nextTrack()">Next </button>
+        <button ng-click="musicApp.prevTrack()">Prev</button>
+        <button ng-click="musicApp.showNewTrackForm()">Add New Track</button>
+        <!-- -----------------------New track------------------------------ -->
+        <div ng-show="musicApp.showNewTrack">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{musicApp.trackname}}</span>
+                        <span class="md-subhead">{{musicApp.genres}}</span>
+                        <span class="md-subhead">{{musicApp.rating}}</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media"></div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Title</label>
+                    <input ng-model="musicApp.trackname">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Rating</label>
+                    <input ng-model="musicApp.rating">
+                </md-input-container>
+                <md-input-container>
+                    <md-select placeholder="Select Genres" ng-model="user" md-on-open="musicApp.loadGenres()" style="min-width: 200px;">
+                        <md-option ng-click="musicApp.getId(gen.id)" ng-repeat="gen in musicApp.allGenres">{{gen.name}}</md-option>
+                        <md-button class="md-raised" ng-click="musicApp.loadMore(musicApp.allGenres)">Load more...</md-button>
+                    </md-select>
+                </md-input-container>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="musicApp.saveNewTrack()">Save</md-button>
+                    <md-button ng-click="musicApp.hideNewTrackForm()">Close</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+        <!-- -----------------------Edit track------------------------------ -->
+        <div ng-show="musicApp.showEditTrack">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{musicApp.trackname}}</span>
+                        <span class="md-subhead">{{musicApp.genres}}</span>
+                        <span class="md-subhead">{{musicApp.rating}}</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media"></div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Title</label>
+                    <input ng-model="musicApp.trackname">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Rating</label>
+                    <input ng-model="musicApp.rating">
+                </md-input-container>
+                 <md-input-container>
+                    <md-select placeholder="Select Genres" ng-model="user" md-on-open="musicApp.loadGenres()" style="min-width: 200px;">
+                        <md-option ng-click="musicApp.getId(gen.id)" ng-repeat="gen in musicApp.allGenres">{{gen.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="musicApp.updateTrack(musicApp.trackname,musicApp.rating,musicApp.genres,musicApp.id)">Update</md-button>
+                    <md-button ng-click="musicApp.hideEditTrackForm()">Close</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+        <!-- ---------------------------------All tracks-------------------------------- -->
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch class="col-md-10 col-md-offset-1" ng-repeat="track in musicApp.tracks">
+            <md-card-title>
+                <md-card-title-text>
+                    <!-- <span class="md-headline">{{track.id}}</span> -->
+                    <span ng-click="musicApp.showEditTrackForm(track.title,track.rating,track.genres,track.id)" class="md-subhead">{{track.title}} [{{track.genres}}]  {{track.rating}}</span>
+                    <!--  <span class="md-subhead"></span>
+                        <span class="md-subhead"></span> -->
+                    <!-- <span class="md-subhead">Damn Right! you are ;)</span> -->
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+                <!-- <md-button onclick ="location.href"={{mobil.url}}>Go to website</md-button>
+           -->
+            </md-card-actions>
+        </md-card>
+    </div>
+        </div>
+</div>
+</div>
+</body>
+<!-- Angular.js -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+<!-- Angular ng-resource -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
+<!-- Angular animation -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+<!-- Jquery Lib -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<!-- Bootstrap.js -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- This one is for router -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<!-- App.js for this app -->
+<script type="text/javascript" src="app.js"></script>
+
+</html>
