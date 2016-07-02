@@ -84,3 +84,7 @@ md-card.md-default-theme, md-card
 {
 	height: 7em;
 }
+
+.md-button.md-default-theme.md-raised, .md-button.md-raised{
+	color: rgb(255, 64, 129);
+}
