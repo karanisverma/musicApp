@@ -69,13 +69,13 @@ md-card md-card-title{
 }
 
 p.track_title{
-	float: left;
+	
     font-size: 23px;
     font-weight: 700;
 }
 
 p.track_genres{
-	float: left;
+	
     color: #5f5858;
     font-size: 13px;
     margin-top: 1px;
@@ -87,4 +87,16 @@ md-card.md-default-theme, md-card
 
 .md-button.md-default-theme.md-raised, .md-button.md-raised{
 	color: rgb(255, 64, 129);
+}
+
+.musicbox_padding{
+	padding: 0;
+}
+
+.musicbox_padding1{
+	padding: 0;
+}
+.musicbox_padding2{
+	padding: 0;
+	
 }

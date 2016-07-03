@@ -1,6 +1,6 @@
 (function() {
     var app = angular.module('music-app', ['ngMaterial', 'ngResource', 'ngRoute']);
-
+    // app.controller(){}
     app.controller('trackController', ['$resource', function($resource) {
         var track = this;
         track.showNewTrack = false;

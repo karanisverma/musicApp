@@ -120,9 +120,15 @@
                 <md-card-title-text>
                     <!-- <span class="md-headline">{{track.id}}</span> -->
                     <span ng-click="track.showEditTrackForm(track.title,track.rating,track.genres,track.id)" class="md-subhead">
-                    <p class="track_title">{{track.title}}</p><br>
-                     <p class="track_genres">[{{track.genres}}] </p>
-                      <p class="track_rating"> {{track.rating}}</p>
+                    <div class="col-md-12 musicbox_padding">
+                    <div class="col-md-6 musicbox_padding1">
+                    <p class="track_title pull-left">{{track.title}}</p><br>
+                     <p class="track_genres pull-left">[{{track.genres}}] </p>
+                     </div>
+                     <div class="col-md-6 musicbox_padding2">
+                      <p class="track_rating pull-right"> {{track.rating}}</p>
+                      </div>
+                      </div>
                       </span>
                     <!--  <span class="md-subhead"></span>
                         <span class="md-subhead"></span> -->

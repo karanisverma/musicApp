@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>star</title>
+	 <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Angular material css -->
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <!-- Device mokeup CSS -->
+    <link href="css/devices.min.css" rel="stylesheet">
+    <!-- Custom css -->
+    <link href="css/custom.css" rel="stylesheet">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="js/angular.min.js"></script>
+<!-- Angular ng-resource -->
+<script src="js/angular-resource.min.js"></script>
+<!-- Angular animation -->
+<script src="js/angular-animate.min.js"></script>
+<script src="js/angular-aria.min.js"></script>
+<script src="js/angular-messages.min.js"></script>
+<!-- Angular Material Library -->
+<script src="js/angular-material.min.js"></script>
+<!-- Jquery Lib -->
+<script src="js/jquery2.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="js/jquery.min.js"></script>
+<!-- Bootstrap.js -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- This one is for router -->
+<script src="js/angular-route.min.js"></script>
+<!-- App.js for this app -->
+<script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+<div ng-app="app" ng-controller="RatingController as rating" class="container">
+  <h1>Angular Star Rating Directive</h1>
+  <div star-rating ng-model="rating.rating1" max="10" on-rating-select="rating.rateFunction(rating)"></div>
+  <star-rating ng-model="rating.rating2" readonly="rating.isReadonly"></star-rating>
+  <label>
+    <input type="checkbox" ng-model="rating.isReadonly"/>
+    Is Readonly
+  </label>
+
+  <div><strong>Rating 1:</strong> {{rating.rating1}}</div>
+  <div><strong>Rating 2:</strong> {{rating.rating2}}</div>
+</div>
+
+</body>
+</html>
+
+<style type="text/css">
+	.star-rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.star-rating .star {
+  padding: 1px;
+  color: #ddd;
+  font-size: 20px;
+  text-shadow: .05em .05em #aaa;
+  list-style-type: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.star-rating .star.filled {
+  color: #fd0;
+}
+.star-rating.readonly .star.filled {
+  color: #666;
+}
+
+</style>
+
+<script type="text/javascript">
+	// http://angulartutorial.blogspot.com/2014/03/rating-stars-in-angular-js-using.html
+
+(function() {
+  'use strict';
+
+  angular
+    .module('app', [])
+    .controller('RatingController', RatingController)
+    .directive('starRating', starRating);
+
+  function RatingController() {
+    this.rating1 = 5;
+    this.rating2 = 2;
+    this.isReadonly = true;
+    this.rateFunction = function(rating) {
+      console.log('Rating selected: ' + rating);
+    };
+  }
+
+  function starRating() {
+    return {
+      restrict: 'EA',
+      template:
+        '<ul class="star-rating" ng-class="{readonly: readonly}">' +
+        '  <li ng-repeat="star in stars" class="star" ng-class="{filled: star.filled}" ng-click="toggle($index)">' +
+        '    <i class="fa fa-star"></i>' + // or &#9733
+        '  </li>' +
+        '</ul>',
+      scope: {
+        ratingValue: '=ngModel',
+        max: '=?', // optional (default is 5)
+        onRatingSelect: '&?',
+        readonly: '=?'
+      },
+      link: function(scope, element, attributes) {
+        if (scope.max == undefined) {
+          scope.max = 5;
+        }
+        function updateStars() {
+          scope.stars = [];
+          for (var i = 0; i < scope.max; i++) {
+            scope.stars.push({
+              filled: i < scope.ratingValue
+            });
+          }
+        };
+        scope.toggle = function(index) {
+          if (scope.readonly == undefined || scope.readonly === false){
+            scope.ratingValue = index + 1;
+            scope.onRatingSelect({
+              rating: index + 1
+            });
+          }
+        };
+        scope.$watch('ratingValue', function(oldValue, newValue) {
+          if (newValue) {
+            updateStars();
+          }
+        });
+      }
+    };
+  }
+})();
+
+</script>
+
